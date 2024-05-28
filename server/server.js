@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const authRoute = require('./router/auth-router');
 const cors = require("cors");
+const path = require("path");
 const connectDB = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 const contactRoute = require("./router/contact-router");
@@ -25,6 +26,11 @@ app.use("/api/form",contactRoute);
 app.use("/api/details",propertyRoute);
 
 app.use(errorMiddleware);
+
+app.get("/", (req, res) => {
+    app.use(express.static(path.resolve(__dirname, "client", "build")));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
 
 const PORT = 5000;
 connectDB().then(() =>{

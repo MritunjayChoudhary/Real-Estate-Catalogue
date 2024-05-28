@@ -3,7 +3,7 @@ const User = require("../model/user-model");
 const home = async(req,res) =>{
     try{
         
-        res.status(200).send("welcome to home page")
+        res.status(200).send("welcome to home page")  
     }
     catch(error){
         res.status(500).send("404 page not found")
